@@ -1,9 +1,8 @@
 % !Mode:: "TeX:UTF-8"
 %!TEX program  = xelatex
 
-\documentclass{cumcmthesis}
-%\documentclass[with\mathrm{out}preface,bwprint]{cumcmthesis} %去掉封面与编号页
-%\documentclass[with\mathrm{out}preface,bwprint]{cumcmthesis} %去掉封面与编号页
+%\documentclass{cumcmthesis}
+\documentclass[withoutpreface,bwprint]{cumcmthesis} %去掉封面与编号页
 
 \usepackage{url}
 \title{机场的出租车问题}
@@ -21,12 +20,12 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-	现代社会中，人们在日常出行方式当中必然少不了出租车这个选项。如何让乘客和司机利益均得到保障是我们研究的问题。
+	现代社会中，人们在日常出行方式当中必然少不了出租车这个选项。如何让乘客和司机利益均得到保障是研究的问题。
 	该文主要通过对宏观和微观两种情况建立数学模型，来得到有关出租车司机该如何进行决策的方法和机场管理部门应如何设置接车方式和对短途载客并再次返回的出租车给予“优先权”的具体解决方案。
 	\par
 	对于问题一，该文主要建立出宏观地图与司机等待模型，利用题目已知条件知道司机能看到的具体等待时间$t_{ \mathrm{wait}}$和计价方式还有出租车的平均收益$a$。用分段函数方式来求出了计价方式$f$的具体表达式。求出两种收益分别的表达式之后，直接比较这两个表达式，即可得到结果。
 	\par
-	对于问题二，我们选取郑州机场的目前的数据，有关于这部分数据均用爬虫取自于网上。利用过去半个小时之内离开飞机场和进入飞机场的车辆数，我们能够得到司机的平均等待时间$t_{ \mathrm{wait}}$的具体值，再利用郑州的出租车营业方案，得到计价方式$f$的具体表达式，这时候直接利用第一问的表达式即可完成此题。
+	对于问题二，选取郑州机场的目前的数据，有关于这部分数据均用爬虫取自于网上。利用过去半个小时之内离开飞机场和进入飞机场的车辆数，能够得到司机的平均等待时间$t_{ \mathrm{wait}}$的具体值，再利用郑州的出租车营业方案，得到计价方式$f$的具体表达式，这时候直接利用第一问的表达式即可完成此题。
 	\par
 	对于问题三，
 	\par
@@ -55,11 +54,12 @@
 机场管理者设定不同的上下车点，司机接客的方式，对短途载客再次返回的出租车给予一定的“优先权”，均会影响到具体的效益以及收入情况。
 
 \par
-在问题一当中，题设较为简单，只需要建立出租车司机选择决策模型，并给出司机的选择策略即可，所以我们利用题目所给出的司机已知的条件。
-也即大致的出租车司机排队等待时间加服务时间$t_{ \mathrm{wait}}$和出租车的计价方式$f$还有具体的城市到飞机场的距离$l_{\mathrm{urban}}$第一小问希望我们利用这些条件，能够得到最终司机分别在哪一种情况下选择哪一种方案的解析解。
+在问题一当中，题设较为简单，只需要建立出租车司机选择决策模型，并给出司机的选择策略即可，所以利用题目所给出的司机已知的条件。\par
+也即大致的出租车司机排队等待时间加服务时间$t_{ \mathrm{wait}}$和出租车的计价方式$f$还有具体的城市到飞机场的距离$l_{\mathrm{urban}}$。\par
+第一小问希望利用这些条件，能够得到最终司机分别在哪一种情况下选择哪一种方案的解析解。
 
 \par
-在问题二当中，题目直接要求对于一个具体城市的具体司机的具体选择，这需要考察网上的信息搜索能力，在第一问已经得到抽象的解析解的时候，题目要求我们只需要把具体数值代入表达式当中得到具有现实参考意义的解。
+在问题二当中，题目直接要求对于一个具体城市的具体司机的具体选择，这需要考察网上的信息搜索能力，在第一问已经得到抽象的解析解的时候，题目要求只需要把具体数值代入表达式当中得到具有现实参考意义的解。
 
 \par
 在问题三当中，
@@ -70,13 +70,15 @@
 \newpage
 \section{问题分析}
 \subsection{问题一的分析}
-问题一较为简单，因此我们只需要拟定各个不同的定义所代表的含义，目的在于给司机选定到底选择哪一个哪一种方案收益最高。虽然本问并没有给出具体数据，但我们仍然可以把一些量用字母替代。\par
-考虑到司机是能够观察到具体还有多少乘客和出租车的，所以我们直接能够假定司机知道还需要等待多久的时间，这是合理的。由于出租车司机的收入司机也是知道的，所以可以假定市区出租车的平均收入。\par
-通过这些条件，我们选择是否留在机场接客还是直接回市中心是通过比较两者的平均收益得到的。\par
-这时候利用之前得到的出租车收益图函数我们即可得到最终目标的解析解。\par
+问题一较为简单，因此只需要拟定各个不同的定义所代表的含义，目的在于给司机选定到底选择哪一个哪一种方案收益最高。虽然本问并没有给出具体数据，但仍然可以把一些量用字母替代。\par
+考虑到司机是能够观察到具体还有多少乘客和出租车的，所以直接能够假定司机知道还需要等待多久的时间，这是合理的。由于出租车司机的收入司机也是知道的，所以可以假定市区出租车的平均收入。\par
+通过这些条件，选择是否留在机场接客还是直接回市中心是通过比较两者的平均收益得到的。\par
+这时候利用之前得到的出租车收益图函数即可得到最终目标的解析解。\par
 
 \subsection{问题二的分析}
-
+问题二需要寻找具体的城市具体分析，由于没有附录提供的任何数据，使用计算机技术在网上进行爬虫，记录并得到了郑州市的有关具体数据。\par
+由于这些数据并不是能够直接得到第一问所设条件的具体值，因此得对这些数据进行处理以得到最终需要的值。\par
+通过这些数据，代入第一问所得到的值，能够得到该机场出租车司机的具体选择方案。最终，通过数据依赖分析来分析模型的合理性和对相关因素的依赖性。\par
 
 \subsection{问题三的分析}
 
@@ -94,6 +96,8 @@
 	\item 假设一辆车只载送一位乘客。
 	\item 假设空载费用损失为油费。
 	\item 假设一个周期内出租车和乘客一一抵消。
+	\item 假设使用92号汽油。
+	\item 假设出租车使用汽油总是$1L$走$11.8$公里的距离。
 \end{itemize}
 
 \newpage
@@ -101,18 +105,19 @@
 \begin{center}
 	\begin{tabular}{cc}
 		\hline
-		\makebox[0.3\textwidth][c]{符号} & \makebox[0.4\textwidth][c]{意义}           \\ \hline
-		$f$                              & 出租车的收益函数                           \\ \hline
-		$t_{ \mathrm{wait}}$             & 出租车排队等待时间加服务时间               \\ \hline
-		$m_{\mathrm{start}}$             & 出租车起步价                               \\ \hline
-		$m_{\mathrm{oil}}$               & 每一公里出租车的油费价格                   \\ \hline
-		$l_{\mathrm{init}}$              & 开始按里程计价路程                         \\ \hline
-		$k$                              & 每公里计费价格                             \\ \hline
-		$m_{\mathrm{night}}$             & 夜价提升价格量                             \\ \hline
-		$l_{\mathrm{urban}}$             & 机场到市区的平均距离                       \\ \hline
-		$v_{\mathrm{out}}$               & 从机场到市区当中的郊区行车速度             \\ \hline
-		$m_{\mathrm{aver}}$              & 在市区当中的平均收入                       \\ \hline
-		$t_{\mathrm{city}}$              & 司机在市区中平均在每隔多久能接到到机场的客 \\ \hline
+		\makebox[0.3\textwidth][c]{符号} & \makebox[0.4\textwidth][c]{意义}                     \\ \hline
+		$fee$                            & 出租车的计价收益函数                                 \\ \hline
+		$oilfee$                         & 油费的支出价格函数                                   \\ \hline
+		$t_{ \mathrm{wait}}$             & 出租车排队等待时间加服务时间                         \\ \hline
+		$m_{\mathrm{start}}$             & 出租车起步价                                         \\ \hline
+		$m_{\mathrm{oil}}$               & 每一公里出租车的油费价格                             \\ \hline
+		$l_{\mathrm{init}}$              & 开始按里程计价路程                                   \\ \hline
+		$k$                              & 每公里计费价格                                       \\ \hline
+		$m_{\mathrm{night}}$             & 夜价提升价格量                                       \\ \hline
+		$l_{\mathrm{urban}}$             & 机场到市区的平均距离                                 \\ \hline
+		$v_{\mathrm{out}}$               & 从机场到市区当中的郊区行车速度                       \\ \hline
+		$m_{\mathrm{aver}}$              & 出租车司机中的平均每分钟收入                         \\ \hline
+		$t_{\mathrm{city}}$              & 司机在市区中接到到机场的客，并再次回到机场的平均时间 \\ \hline
 	\end{tabular}
 \end{center}
 
@@ -120,27 +125,34 @@
 
 \newpage
 \section{建模与求解}
-\subsection{出租车的计价模型}
-对于一般而言城市的出租车，当是同一种车型时，相同情况下的成本是相同的。每一公里为$m_{\mathrm{oil}}$的油费价格。\par
-并且，仍然是对于同一种车型的出租车来说，一般有几种计费方式混合使用，不同情况下对应这不一样的计费方式。在这里我们选取最常用的计费方式。\par
-假设出租车起步价为$m_{\mathrm{start}}$，在$l_{\mathrm{init}}$公里后开始计价，每一公里计费$k$元。夜价则在日价的起步价基础上再次增加$m_{\mathrm{night}}$的收益。\par
-则白天时前$l_{\mathrm{init}}$公里的收益为：$f(l)=m_{\mathrm{start}}-l\cdot m_{\mathrm{oil}}$元。凌晨时前$l_{\mathrm{init}}$公里的收益为：$f(l)=m_{\mathrm{start}}+m_{\mathrm{night}}-l\cdot m_{\mathrm{oil}}$元。\par
-当过了前$l_{\mathrm{init}}$公里时，假设已经开了$l$公里的路程，那么则白天时的收益为：
-$$
-	\begin{array}{lcl}
-		 & f(l) = m_{\mathrm{start}}-l_{\mathrm{init}}\cdot m_{\mathrm{oil}}+(l-l_{\mathrm{init}})\cdot (k-m_{\mathrm{oil}}) \\
-		 & = m_{\mathrm{start}}+l\cdot k-l\cdot m_{\mathrm{oil}}-l_{\mathrm{init}}\cdot k
-		\quad\quad (l\ge l_{\mathrm{init}})
+\subsection{出租车的收益模型}
+对于城市出租车，忽略其型号、车龄等差别，并假设每辆出租车参数相同。\par
+在一个城市中，出租车管理中通常几种计费方式混合使用，不同情况下计费方式不同。在这里为简化模型，选取最常用的计费方式。该计费方式描述如下：\par
+出租车起步价为$m_{\mathrm{start}}$元，在$l_{\mathrm{init}}$公里后开始按路程距离计价，每多一公里计费$k$元。夜价则在日价的起步价基础上增加$m_{\mathrm{night}}$元。\par
+则白天时的出租车计价方式如下：\par
+\begin{equation}
+	fee(d,\mathrm{day})=\left\{
+	\begin{array}{lr}
+		m_{\mathrm{start}}                               & ,d<l_{\mathrm{init}}    \\
+		m_{\mathrm{start}}+ k \cdot(l-l_{\mathrm{init}}) & ,d\ge l_{\mathrm{init}}
 	\end{array}
-$$\par
-凌晨的收益则是白天时的收益$+m_{\mathrm{night}}$，也即：
-$$
-	f(l)=m_{\mathrm{start}}+m_{\mathrm{night}}+l\cdot k-l\cdot m_{\mathrm{oil}}-l_{\mathrm{init}}\cdot k
-	\quad\quad (l\ge l_{\mathrm{init}})
-$$
+	\right.
+\end{equation}
+
+夜晚时出租车计价方式如下：\par
+\begin{equation}
+	fee(d,\mathrm{night})=fee(d,\mathrm{day})+m_{\mathrm{night}}
+\end{equation}
+
+但在出租车行驶过程中，如果出现空载情况，司机需要承担一定损失。假设空载损失的主要部分是油费，且油费与行车距离成正比，系数为每公里出租车油费价格$m_{\mathrm{oil}}$：\par
+\begin{equation}
+	oilfee(d)=d\cdot m_{\mathrm{oil}}
+\end{equation}
+
+用matlab对白天情形下的$fee-d$函数关系与$oilfee-d$函数关系进行可视化，结果如下：\par
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=1\textwidth]{Figure_2.png}
+	\includegraphics[width=0.8\textwidth]{Figure_2.png}
 	\caption{出租车的收益函数图示}
 \end{figure}
 
@@ -150,67 +162,145 @@ $$
 先明确一直等待载客之后返回市区和直接返回市区拉客这两种情况分别的平均收益该如何计算。假定机场到市区的平均距离为$l_{\mathrm{urban}}$，在市区当中的平均收入记为每一小时平均$m_{\mathrm{aver}}$元。在从机场到市区当中的郊区行车速度为$v_{\mathrm{out}}$。司机在市区当中接客的平均时间为$t_{\mathrm{city}}$。
 \par
 \subsubsection{模型的建立}
-（1）若司机选择就在机场接客，那么我们有关于时间的式子：\par
+（1）若司机选择就在机场接客，那么有关于时间的式子：\par
 在机场时间$t_{ \mathrm{wait}}$，在高速路上从机场到城市中心的时间为$\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}$，在城市当中的时间为$t_{\mathrm{city}} $ 总时间
-$$t_{1} =t_{ \mathrm{wait}}+\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}} $$\par
-机场载客的收入为
+\begin{equation}
+	t_{1} =t_{ \mathrm{wait}}+\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}
+\end{equation}\par
+机场载客的收入为\par
 $$f(l_{\mathrm{urban}}) = m_{\mathrm{start}}-l_{\mathrm{init}}\cdot m_{\mathrm{oil}}+(l_{\mathrm{urban}}-l_{\mathrm{init}})\cdot (k-m_{\mathrm{oil}}) $$\par
 在市区的收入为：$a = m_{\mathrm{aver}}\cdot t_{\mathrm{city}}$
 平均收入为：
 $$a_{1}=\frac{f(l_{\mathrm{urban}})+a}{t_1}  = \frac{m_{\mathrm{start}}-l_{\mathrm{init}}\cdot m_{\mathrm{oil}}+(l_{\mathrm{urban}}-l_{\mathrm{init}})\cdot (k-m_{\mathrm{oil}})+ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}}{t_{ \mathrm{wait}}+\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}} $$\par
 
 \par \par
-（2）若司机选择不接客，直接回市区找客人，那么我们仍然可以得到一个关于时间的式子：\par
-这时候没有了在机场时间的出租车排队等待时间加服务时间了，同样，我们有高速路上从机场到城市中心的时间为$\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}$，在城市当中的时间为$t_{\mathrm{city}} $。总时间为：
+（2）若司机选择不接客，直接回市区找客人，那么仍然可以得到一个关于时间的式子：\par
+这时候没有了在机场时间的出租车排队等待时间加服务时间了，同样，有高速路上从机场到城市中心的时间为$\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}$，在城市当中的时间为$t_{\mathrm{city}} $。总时间为：
 $$ t_{2} = \frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}} $$\par
-那么我们只有在市区的收入$a = m_{\mathrm{aver}}\cdot t_{\mathrm{city}}$，并且我们甚至有耗费在路上的油费$l_{\mathrm{urban}}\cdot m_{\mathrm{oil}} $所以我们有 平均收入为：\par
-$$
+那么只有在市区的收入$a = m_{\mathrm{aver}}\cdot t_{\mathrm{city}}$，并且甚至有耗费在路上的油费$l_{\mathrm{urban}}\cdot m_{\mathrm{oil}} $所以有 平均收入为：\par
+\begin{equation}
 	a_2=\frac{a-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}{t_{2}}=\frac{m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}{\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}} }
-$$\par
+\end{equation}\par
 
-我们只需比较这两个的大小，若$a_1>a_2$就只需要解不等式：\par
-$$
+只需比较这两个的大小，若$a_1>a_2$就只需要解不等式：\par
+\begin{equation}
 	\frac{m_{\mathrm{start}}-l_{\mathrm{init}}\cdot m_{\mathrm{oil}}+(l_{\mathrm{urban}}-l_{\mathrm{init}})\cdot (k-m_{\mathrm{oil}})+ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}}{t_{ \mathrm{wait}}+\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}} > \frac{m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}{\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}} }
-$$\par
-解得：
-$$
+\end{equation}\par
+解得：\par
+\begin{equation}
 	t_{\mathrm{wait}}< \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ l_{\mathrm{urban}}\cdot (k-m_{\mathrm{oil}}) -k\cdot l_{\mathrm{init}} +   m_{\mathrm{aver}}\cdot t_{\mathrm{city}}\right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}} - \left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)
-$$
-我们记这个特殊的时间点为$t_0$，
+\end{equation}
+记这个特殊的时间点为$t_0$，
 $$
 	t_0=  \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ l_{\mathrm{urban}}\cdot (k-m_{\mathrm{oil}}) -k\cdot l_{\mathrm{init}} +   m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-m_{\mathrm{aver}}\cdot t_{\mathrm{city}}+l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}\right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}
-$$ $$
+$$
+\begin{equation}
 	= \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ l_{\mathrm{urban}}\cdot k -k\cdot l_{\mathrm{init}} \right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}
-$$\par
-等待时间$t_{\mathrm{wait}}$比$t_0$时间小时，我们就继续在机场进行等待，当等待时间$t_{\mathrm{wait}}$比$t_0$大时，司机就得离开机场直接前往市中心接客更加划算。这是白天的情况。\par
-当为凌晨时分是夜班的时候，用同样是上述过程可以算出
-$$
+\end{equation}\par
+等待时间$t_{\mathrm{wait}}$比$t_0$时间小时，就继续在机场进行等待，当等待时间$t_{\mathrm{wait}}$比$t_0$大时，司机就得选择离开机场直接前往市中心接客，因为这样平均赚钱数更加多。这是白天的情况。\par
+当为凌晨时分是夜班的时候，用同样的上述过程可以算出：\par
+\begin{equation}
 	t_0= \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ m_{\mathrm{night}} + l_{\mathrm{urban}}\cdot k -k\cdot l_{\mathrm{init}} \right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}
-$$
-\newpage 
+\end{equation}
+
+\newpage
 \subsection{问题二的建模与求解}
 
 \subsubsection{模型的建立}
+目前再网络上能够找寻到的数据有：郑州司机的日均收入：$400$元人民币。按照每天工作$8$个小时计算，即每分钟$\frac{5}{6}$元人民币。也即$m_{\mathrm{aver} }= \frac{5}{6}$元。\par
+在郑州机场出租车秩序管理站上可以查询到实时的数据。\par
+每个时刻蓄车池里面均有许多车辆在里面。利用数据，可以得到如下的统计图：\par
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figure_3.png}
+	\caption{场内待运车辆数统计图}
+\end{figure}
+还可以得到每一个时刻汽车出站运载的个数：\par
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figure_4.png}
+	\caption{运客速度统计图（单位：辆/min）}
+\end{figure}
+
 
 \subsubsection{模型的求解}
+将场内待运车辆数写成关于时间$t$（单位：min）的表达式：$\eta(t)$。\par
+再将出站车辆数写成关于时间$t$（单位：min）的表达式：$\theta(t)$\par
+要求出$t_{\mathrm{wait}}$的大小，只需要一个积分方程。假设这个时候的时间点为$t$，则上面函数以及$t_{\mathrm{wait}}$满足约束式：\par
+\begin{equation}
+	\eta(t)=\int_{t}^{t+t_{\mathrm{wait}}}\theta(t)\mathrm dt
+\end{equation}
+由于$\theta(t)$无具体解析表达式，是统计得到的图表。有式子变换：\par
+\begin{equation}
+	\eta(t)=\int_{t}^{t+t_{\mathrm{wait}}}\theta(t)\mathrm dt\approx \sum_{i=0}^{[t_{\mathrm{wait}}]}{\theta(t+i)}
+\end{equation}
+找到满足条件的$t_{\mathrm{wait}}$，使得成立约束式：\par
+\begin{equation}
+	\sum_{i=0}^{t_{\mathrm{wait}}}{\theta(t+i)}\leq\eta(t) \leq\sum_{i=0}^{t_{\mathrm{wait}}+1}{\theta(t+i)}\quad\quad ( t_{\mathrm{wait}}\in \mathbb{N}^*)
+\end{equation}\par
+解出来的结果用面积统计图表示出来为：\par
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Figure_5.png}
+	\caption{等待时间统计图（单位：min）}
+\end{figure}
+这时候，查询郑州的出租车价格信息网得知，价格费用与路程的关系为：\par
+\begin{equation}
+	\mathrm{fee}(l)=\left\{
+	\begin{array}{ll}
+		c_0,                           & d \leq 2km \\
+		c_0+1.5\cdot \left(l-2\right), & 2< d       \\
+	\end{array}
+	\right.
+\end{equation}
+$c_0$在白天$8$元，在晚上$10$元。\par
+而这时候，查询郑州的汽油价格信息网得知，92号汽油每一升为$5.60$元，那么，每公里价格为$0.4746$元\par
+查询高速路行车速度得知:平均速度为$100\mathrm{km/h}$即$\frac{5}{3}\mathrm{km/min} $\par
+查询地图得知：平均到市中心距离为：$50.7\mathrm{km}$
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{Map_1.png}
+	\caption{地图信息}
+\end{figure}
 
-% \linespread{0.8}
-% \begin{center}
-% 	\begin{table}[!htbp]
-% 		\caption[标签名]{得到的结果（部分）}
-% 		\begin{tabular}{ccccc}
-% 			\toprule[1.5pt]
-% 			 & c           & x            & y            & \\
-% 			\midrule[1pt]
-% 			 & 5.429888763 & 21.45524673  & 40.26127612  & \\
-% 			\bottomrule[1.5pt]
-% 		\end{tabular}
-% 	\end{table}
-% \end{center}
-% \linespread{1.6}
+也即最终得到如下信息表格：\par
+\begin{table}[!htbp]
+	\caption[标签名]{得到的结果（部分）}
+	\begin{tabular}{c|c|c|c|c|c|c|c}
+		\toprule[1.5pt]
+		$m_{\mathrm{start}}$ & $m_{\mathrm{oil}}$       & $l_{\mathrm{init}}$ & $v_{\mathrm{out}}$            & $m_{\mathrm{night}}$ & $m_{\mathrm{aver}}$ & $l_{\mathrm{urban}}$ & $k$                    \\
+		\midrule[1pt]
+		8元                  & $0.4746$元$\mathrm{/km}$ & $2\mathrm{km}$      & $ \frac{5}{3}\mathrm{km/min}$ & $2$元                & $\frac{5}{6}$元     & $50.7\mathrm{km}$    & $ 1.5$元$\mathrm{/km}$ \\
+		\bottomrule[1.5pt]
+	\end{tabular}
+\end{table}
+代入式子：
+$$
+	t_0 = \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ l_{\mathrm{urban}}\cdot k -k\cdot l_{\mathrm{init}} \right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}
+$$\par
+当中，得到
+$$
+	t_0 = \frac{\left(\frac{50.7}{\frac{5}{3}}+t_{\mathrm{city}}\right)\cdot \left(8+50.7\cdot 1.5 -1.5\cdot 2 \right)}{ \frac{5}{6}\cdot t_{\mathrm{city}}-50.7\cdot 0.4746}=\frac{97.26\cdot t_{\mathrm{city}}+2958.6492}{ t_{\mathrm{city}} -28.874664}
+$$\par
+这时候，根据手头上得知的信息，估算出$ t_{\mathrm{city}}$的值大致为：$270\mathrm{min}$，代入上式得到$t_0=121.177\mathrm{min}$。\par 
+利用matlab绘制出图像，蓝色部分时间为司机应当继续排队等待接客，红色部分代表司机不应该继续排队，应当直接回到郑州市中心。\par 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Figure_6.png}
+	\caption{}
+\end{figure}
+\newpage 
+毕竟关于$ t_{\mathrm{city}}$的具体值误差较大，所以把这个变量以枚举的方式展现，得到$t_0 - t_{\mathrm{city}}$的关系式：\par 
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Figure_7.png}
+	\caption{$t_0 - t_{\mathrm{city}}$关系图}
+\end{figure}
+利用具体的$t_{\mathrm{city}}$的值，司机便能够根据他所见到的情景，具体而又准确的选择出是否机场排队接客或者是直接回市区。\par 
 
 \newpage
 \subsection{问题三的建模与求解}
+
 \subsubsection{模型的建立}
 依据接待方式的不同，能最终划归成两种情况：
 \begin{figure}[!h]
@@ -227,6 +317,8 @@ $$
 
 
 \subsubsection{模型的求解}
+
+
 
 \newpage
 \subsection{问题四的建模与求解}
@@ -353,12 +445,12 @@ console.log('"载体","飞行","起源","状态","到来"');
 
 function getarrivals(){
     for (let i = 1; i < 9; i++) {
-        setTime\mathrm{out}(() => {
+        setTimeout(() => {
             var timeperiod = document.getElementsByClassName("timeperiod");
             var timeperiodNode = timeperiod[0].childNodes
             var shouldClick = timeperiodNode[i * 2];
             shouldClick.click();
-            setTime\mathrm{out}(() => {
+            setTimeout(() => {
                 var arrivals = document.getElementById("arrivals");
                 var nodeColl = arrivals.childNodes;
                 for (let j = 0; j < nodeColl.length; j++) {
@@ -378,12 +470,12 @@ function getarrivals(){
 
 function getdepartures(){
     for (let i = 1; i < 9; i++) {
-        setTime\mathrm{out}(() => {
+        setTimeout(() => {
             var timeperiod = document.getElementsByClassName("timeperiod");
             var timeperiodNode = timeperiod[0].childNodes
             var shouldClick = timeperiodNode[i * 2];
             shouldClick.click();
-            setTime\mathrm{out}(() => {
+            setTimeout(() => {
                 var departures = document.getElementById("departures");
                 var nodeColl = departures.childNodes;
                 for (let j = 0; j < nodeColl.length; j++) {
@@ -402,6 +494,56 @@ function getdepartures(){
 }
 
 \end{lstlisting}
+
+	\section{第二小问解题方法及绘图--Matlab 源代码}
+	\begin{lstlisting}[language=Matlab]
+time = val.time;
+numbers = val.numbers;
+enter = val.enter;
+leave = val.leave;
+
+e = enter / 30;
+l = leave / 30;
+
+t_wait = 1:18000;
+
+%initializing the t_wait
+interval = 12
+
+for i=1:18000
+    t_wait(1:i)=0;
+end
+
+
+%the main code
+for i=1:18000
+    temp = 0;
+    for j=1:18000
+        if  temp >= numbers(i,1)
+            t_wait(i) = j;
+            break
+        else 
+            temp = temp + l(j * interval + i,1);
+        end
+    end
+end
+
+
+time_temp = time(1:18000).';
+area(time_temp,t_wait,'DisplayName','t_wait')
+xlim([time_temp(1,1)  time_temp(1,18000)])
+
+area(time,l,'DisplayName','l')
+xlim([time_temp(1,1)  time(20282)])
+area(time,numbers,'DisplayName','numbers')
+xlim([time_temp(1,1)  time(20282)])
+
+\end{lstlisting}
+
+
+
+
+
 \end{appendices}
 
 \end{document}
