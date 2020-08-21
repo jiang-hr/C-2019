@@ -451,7 +451,12 @@ $$\par
 	\includegraphics[width=1\textwidth]{Figure_10.png}
 	\caption{}
 \end{figure}
-
+现利用MSE算法来检测真实值与预测值(估计值)差平方的期望。以分析模型的合理性。\par 
+把在$t_x$时间点真实需要等待的$t_{\mathrm{wait}}$记作$t_{t_x,0}$，司机通过自身观测数据得到的$t_{\mathrm{wait}}$记作$t_{t_x,1}$的有公式：\par 
+\begin{equation}
+	M S E=\frac{1}{M} \sum_{m=1}^{M}\left(y_{m}-\hat{y}_{m}\right)^{2}=\frac{1}{48} \sum_{m=1}^{48}\left(t_{t_m,0}-t_{t_m,1}\right)^{2}
+\end{equation}
+经过程序计算，得到均方误差为$M S E= t_{\mathrm{sum}} = 5.7433e+03 $
 
 \newpage
 \subsection{问题三的建模与求解}
