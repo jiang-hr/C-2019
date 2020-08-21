@@ -105,19 +105,20 @@
 \begin{center}
 	\begin{tabular}{cc}
 		\hline
-		\makebox[0.3\textwidth][c]{符号} & \makebox[0.4\textwidth][c]{意义}                     \\ \hline
-		$fee$                            & 出租车的计价收益函数                                 \\ \hline
-		$oilfee$                         & 油费的支出价格函数                                   \\ \hline
-		$t_{ \mathrm{wait}}$             & 出租车排队等待时间加服务时间                         \\ \hline
-		$m_{\mathrm{start}}$             & 出租车起步价                                         \\ \hline
-		$m_{\mathrm{oil}}$               & 每一公里出租车的油费价格                             \\ \hline
-		$l_{\mathrm{init}}$              & 开始按里程计价路程                                   \\ \hline
-		$k$                              & 每公里计费价格                                       \\ \hline
-		$m_{\mathrm{night}}$             & 夜价提升价格量                                       \\ \hline
-		$l_{\mathrm{urban}}$             & 机场到市区的平均距离                                 \\ \hline
-		$v_{\mathrm{out}}$               & 从机场到市区当中的郊区行车速度                       \\ \hline
-		$m_{\mathrm{aver}}$              & 出租车司机中的平均每分钟收入                         \\ \hline
-		$t_{\mathrm{city}}$              & 司机在市区中接到到机场的客，并再次回到机场的平均时间 \\ \hline
+		\makebox[0.3\textwidth][c]{符号} & \makebox[0.4\textwidth][c]{意义}           \\ \hline
+		$fee$                            & 出租车的计价收益                           \\
+		$t_{ \mathrm{wait}}$             & 出租车排队等待时间加服务时间               \\
+		$m_{\mathrm{start}}$             & 出租车起步价                               \\
+		$m_{\mathrm{oil}}$               & 每一公里出租车的油费价格                   \\
+		$m_{\mathrm{night}}$             & 夜价提升价格量                             \\
+		$m_{\mathrm{aver}}$              & 在市区当中的平均收入                       \\
+		$l_{\mathrm{init}}$              & 出租车计价起步距离                         \\
+		$k$                              & 每公里计费价格                             \\
+		$l_{\mathrm{urban}}$             & 机场到市区的平均距离                       \\
+		$v_{\mathrm{sub}}$               & 从机场到市区当中的郊区行车速度             \\
+		$t_{\mathrm{city}}$              & 司机在市区中平均在每隔多久能接到到机场的客 \\
+		$t_{\mathrm{wait}}$              & 出租车排队等待时间与服务时间总和           \\
+		\hline
 	\end{tabular}
 \end{center}
 
@@ -156,51 +157,164 @@
 	\caption{出租车的收益函数图示}
 \end{figure}
 
+在前两问中，出租车总收益将由出租车计价收入$fee$与油费消耗$oilfee$构成,用符号简记为：
+\begin{equation}
+	sumfee(d)=fee(d)-oilfee(d)
+\end{equation}
+
 \subsection{问题一的建模与求解}
 \subsubsection{模型准备}
 
-先明确一直等待载客之后返回市区和直接返回市区拉客这两种情况分别的平均收益该如何计算。假定机场到市区的平均距离为$l_{\mathrm{urban}}$，在市区当中的平均收入记为每一小时平均$m_{\mathrm{aver}}$元。在从机场到市区当中的郊区行车速度为$v_{\mathrm{out}}$。司机在市区当中接客的平均时间为$t_{\mathrm{city}}$。
+只需要明确相同时间内排队载客后返回市区和空载返回市区这两种情况的平均收益该计算公式，司机便能够就是否排队问题做出决策。假定机场到市区的平均距离为$l_{\mathrm{urban}}$。从机场到市区行车速度为$v_{\mathrm{out}}$，市区中行车速度为$v_{\mathrm{city}}$。
 \par
+\newpage
 \subsubsection{模型的建立}
-（1）若司机选择就在机场接客，那么有关于时间的式子：\par
-在机场时间$t_{ \mathrm{wait}}$，在高速路上从机场到城市中心的时间为$\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}$，在城市当中的时间为$t_{\mathrm{city}} $ 总时间
+
+(1)首先明确要考虑的时间段。从选择排队载客后返回市区的方向对时间段进行刻画，整个时间段划分为三部分：
+
+1.出租车排队等待时间与服务时间总和$t_{ \mathrm{wait}}$。
+
+2.出租车从机场返回市区时间$t_{ \mathrm{return}}$，其计算方式为：
 \begin{equation}
-	t_{1} =t_{ \mathrm{wait}}+\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}
-\end{equation}\par
-机场载客的收入为\par
-$$f(l_{\mathrm{urban}}) = m_{\mathrm{start}}-l_{\mathrm{init}}\cdot m_{\mathrm{oil}}+(l_{\mathrm{urban}}-l_{\mathrm{init}})\cdot (k-m_{\mathrm{oil}}) $$\par
-在市区的收入为：$a = m_{\mathrm{aver}}\cdot t_{\mathrm{city}}$
-平均收入为：
-$$a_{1}=\frac{f(l_{\mathrm{urban}})+a}{t_1}  = \frac{m_{\mathrm{start}}-l_{\mathrm{init}}\cdot m_{\mathrm{oil}}+(l_{\mathrm{urban}}-l_{\mathrm{init}})\cdot (k-m_{\mathrm{oil}})+ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}}{t_{ \mathrm{wait}}+\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}} $$\par
+	t_{ \mathrm{return}}=\frac{l_{\mathrm{urban}}}{v_{\mathrm{sub}}}
+\end{equation}
+
+3.出租车回到市区后为完成机场订单仍需在城市中行车的时间$t_{\mathrm{city}}$。
+
+记总时间为$t_{ \mathrm{sum}}$，其中：
+\begin{equation}
+	t_{ \mathrm{sum}}=t_{ \mathrm{wait}}+t_{ \mathrm{return}}+t_{\mathrm{city}}
+\end{equation}
+
+将该时间段对应到空载返回市区的情形，则有：
+
+1.出租车从机场返回市区时间$t_{ \mathrm{return}}$。
+
+2.出租车返回市区后接客时间$t_{ \mathrm{wait}}+t_{\mathrm{city}}$
+
+下面将根据上述上述时间划分对两种选择的平均收益进行计算。
+
+(2)若司机选择排队载客后返回市区，那么总时间段内平均收益的计算方法如下：\par
+\begin{equation}
+	aveincome1=\frac{sumfee(l_{\mathrm{urban}}+v_{\mathrm{city}} \cdot t_{\mathrm{city}})}{t_{ \mathrm{sum}}}
+\end{equation}
+\par
+上式中假定等待时间与服务时间无收入与损失，分子中总收入为机场中接到的一单收入。
 
 \par \par
-（2）若司机选择不接客，直接回市区找客人，那么仍然可以得到一个关于时间的式子：\par
-这时候没有了在机场时间的出租车排队等待时间加服务时间了，同样，有高速路上从机场到城市中心的时间为$\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}$，在城市当中的时间为$t_{\mathrm{city}} $。总时间为：
-$$ t_{2} = \frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}} $$\par
-那么只有在市区的收入$a = m_{\mathrm{aver}}\cdot t_{\mathrm{city}}$，并且甚至有耗费在路上的油费$l_{\mathrm{urban}}\cdot m_{\mathrm{oil}} $所以有 平均收入为：\par
+(3)若司机选择空载返回市区，那么总时间段内平均收益的计算方法如下：\par
 \begin{equation}
-	a_2=\frac{a-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}{t_{2}}=\frac{m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}{\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}} }
-\end{equation}\par
-
-只需比较这两个的大小，若$a_1>a_2$就只需要解不等式：\par
-\begin{equation}
-	\frac{m_{\mathrm{start}}-l_{\mathrm{init}}\cdot m_{\mathrm{oil}}+(l_{\mathrm{urban}}-l_{\mathrm{init}})\cdot (k-m_{\mathrm{oil}})+ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}}{t_{ \mathrm{wait}}+\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}} > \frac{m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}{\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}} }
-\end{equation}\par
-解得：\par
-\begin{equation}
-	t_{\mathrm{wait}}< \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ l_{\mathrm{urban}}\cdot (k-m_{\mathrm{oil}}) -k\cdot l_{\mathrm{init}} +   m_{\mathrm{aver}}\cdot t_{\mathrm{city}}\right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}} - \left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)
+	aveincome2=\frac{m_{\mathrm{aver}}\cdot(t_{\mathrm{wait}}+t_{\mathrm{city}})-oilfee(l_{\mathrm{urban}})}{t_{ \mathrm{sum}}}
 \end{equation}
-记这个特殊的时间点为$t_0$，
-$$
-	t_0=  \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ l_{\mathrm{urban}}\cdot (k-m_{\mathrm{oil}}) -k\cdot l_{\mathrm{init}} +   m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-m_{\mathrm{aver}}\cdot t_{\mathrm{city}}+l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}\right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}
-$$
+
+上式中$m_{\mathrm{aver}}$表示出租车司机在城市内每小时平均收入(考虑了油费损失)。分子中总收入为市区中行车收入减去从机场返回市区的油费消耗。\par
+\par
+
+我们只需比较这两个的大小：
+
+1.若$aveincome1>aveincome2$,应选择排队载客后返回市区。
+
+2.若$aveincome1<aveincome2$，应选择空载返回市区。
+
+下面解该不等式：\par
 \begin{equation}
-	= \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ l_{\mathrm{urban}}\cdot k -k\cdot l_{\mathrm{init}} \right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}
+	\left\{
+	\begin{array}{l}
+		aveincome1>aveincome2                                                                                                       \\
+		aveincome1=\frac{sumfee(l_{\mathrm{urban}}+v_{\mathrm{city}} \cdot t_{\mathrm{city}})}{t_{ \mathrm{sum}}}                   \\
+		aveincome2=\frac{m_{\mathrm{aver}}\cdot(t_{\mathrm{wait}}+t_{\mathrm{city}})-oilfee(l_{\mathrm{urban}})}{t_{ \mathrm{sum}}} \\
+		sumfee(d)=fee(d)-oilfee(d)                                                                                                  \\
+		oilfee(d)=d\cdot m_{\mathrm{oil}}
+	\end{array} \right.
+\end{equation}
+
+解得：
+\begin{equation}
+	t_{\mathrm{wait}}< \frac{fee(l_{\mathrm{urban}}+v_{\mathrm{city}} \cdot t_{\mathrm{city}})-m_{\mathrm{oil}}\cdot v_{\mathrm{city}} \cdot t_{\mathrm{city}}}{m_{\mathrm{aver}}} -t_{\mathrm{city}}
+\end{equation}
+我们记这个特殊的时间点为判断等待时间$t_0$：
+\begin{equation}
+	t_0=  \frac{fee(l_{\mathrm{urban}}+v_{\mathrm{city}} \cdot t_{\mathrm{city}})-m_{\mathrm{oil}}\cdot v_{\mathrm{city}} \cdot t_{\mathrm{city}}}{m_{\mathrm{aver}}} -t_{\mathrm{city}}
 \end{equation}\par
-等待时间$t_{\mathrm{wait}}$比$t_0$时间小时，就继续在机场进行等待，当等待时间$t_{\mathrm{wait}}$比$t_0$大时，司机就得选择离开机场直接前往市中心接客，因为这样平均赚钱数更加多。这是白天的情况。\par
-当为凌晨时分是夜班的时候，用同样的上述过程可以算出：\par
+等待时间$t_{\mathrm{wait}}$比判断等待时间$t_0$小时，选择排队载客后返回市区；当等待时间$t_{\mathrm{wait}}$比判断等待时间$t_0$大时，司机空载返回市区更加划算。\par
+
+那么问题转化为如何计算等待时间与服务时间总和$t_{\mathrm{wait}}$。由题意可知司机可获取的信息为航班信息与蓄车池中出租车数量。该模型将通过这两个变量计算出等待时间与服务时间总和$t_{\mathrm{wait}}$。
+
+为建立该计算模型，先定义三个速度：
+
+1.蓄车池进车速度$v_{\mathrm{in}}$，表示每分钟进入蓄车池的车辆数。假设其于白天为一定值，于晚上为另一定值。
+
+2.服务速度$v_{\mathrm{out}}$，表示每分钟离开蓄车池的车辆数。假设其于单队列单服务口情形下为定值。
+
+3.乘客队列增长速度$v_{\mathrm{pin}}$，表示每分钟乘客队列增长人数。假设每时刻(航班到达时刻间隔为5分钟)到达的航班数量为$n_{\mathrm{fly}}$，每辆航班上乘客为300人，乘客选择乘坐出租车的比例为$\alpha$。那么通过下式对乘客队列增长速度进行计算:
 \begin{equation}
-	t_0= \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ m_{\mathrm{night}} + l_{\mathrm{urban}}\cdot k -k\cdot l_{\mathrm{init}} \right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}
+	v_{\mathrm{pin}}=\frac{n_{\mathrm{fly}}\cdot 300 \cdot \alpha}{5}
+\end{equation}
+
+对于3个速度大小，会有13种情况。下图用图示法进行划分，其中样本点到3个关键点的距离用来表示其3个速度大小。
+
+%这里插入一张图片
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{等待时间计算模型.jpg}
+	\caption{出租车的收益函数图示}
+\end{figure}
+
+13种情况分别为6块区域，6根分界线，1个中心点。对各个情况单独讨论，可发现会出现下述两种现象:
+
+1.人堆积，随时间增长，乘客队列不断增长。
+
+2.车堆积，随时间增长，蓄车池里车辆数量不断增长。
+
+下列表格详细描述了各个情况:
+
+\begin{center}
+	\begin{tabular}{cc}
+		\hline
+		\makebox[0.3\textwidth][c]{情形}                    & \makebox[0.4\textwidth][c]{结果} \\ \hline
+		$v_{\mathrm{pin}}>v_{\mathrm{in}}>v_{\mathrm{out}}$ & 人堆积，车堆积                   \\
+		$v_{\mathrm{pin}}>v_{\mathrm{out}}>v_{\mathrm{in}}$ &
+		人堆积                                                                                 \\
+		$v_{\mathrm{pin}}>v_{\mathrm{in}}=v_{\mathrm{out}}$ & 人堆积                           \\
+		$v_{\mathrm{pin}}=v_{\mathrm{in}}>v_{\mathrm{out}}$ & 人堆积，车堆积                   \\ 		$v_{\mathrm{pin}}=v_{\mathrm{out}}>v_{\mathrm{in}}$                                          &       人堆积                      \\ 	$v_{\mathrm{pin}}=v_{\mathrm{out}}=v_{\mathrm{in}}$                                          & 不堆积                       \\
+		$v_{\mathrm{in}}>v_{\mathrm{pin}}>v_{\mathrm{out}}$ & 人堆积，车堆积                   \\
+		$v_{\mathrm{in}}>v_{\mathrm{out}}>v_{\mathrm{pin}}$ & 车堆积                           \\
+
+		$v_{\mathrm{in}}>v_{\mathrm{pin}}=v_{\mathrm{out}}$ &
+		车堆积                                                                                 \\
+		$v_{\mathrm{in}}=v_{\mathrm{out}}>v_{\mathrm{pin}}$ &
+		车堆积                                                                                 \\
+
+		$v_{\mathrm{out}}>v_{\mathrm{pin}}>v_{\mathrm{in}}$ &
+		人堆积                                                                                 \\
+		$v_{\mathrm{out}}>v_{\mathrm{in}}>v_{\mathrm{pin}}$ &
+		车堆积                                                                                 \\
+		$v_{\mathrm{out}}>v_{\mathrm{pin}}=v_{\mathrm{in}}$ &
+		不堆积                                                                                 \\
+
+		\hline
+	\end{tabular}
+\end{center}
+
+用上图表示结果为:
+%此处插入图片
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{等待时间计算模型2.jpg}
+	\caption{出租车的收益函数图示}
+\end{figure}
+\newpage
+将各个情形分别讨论之后，便能够着手进行等待时间加服务时间总和$t_{\mathrm{wait}}$的计算：
+
+1.不堆积或人堆积时：
+\begin{equation}
+	t_{\mathrm{wait}}=\frac{n}{v_{\mathrm{out}}}
+\end{equation}
+其中$n$为蓄车池中出租车数量。
+
+2.人不堆积而车堆积时：
+\begin{equation}
+	t_{\mathrm{wait}}=\frac{n}{v_{\mathrm{pin}}}
 \end{equation}
 
 \newpage
@@ -282,21 +396,21 @@ $$\par
 $$
 	t_0 = \frac{\left(\frac{50.7}{\frac{5}{3}}+t_{\mathrm{city}}\right)\cdot \left(8+50.7\cdot 1.5 -1.5\cdot 2 \right)}{ \frac{5}{6}\cdot t_{\mathrm{city}}-50.7\cdot 0.4746}=\frac{97.26\cdot t_{\mathrm{city}}+2958.6492}{ t_{\mathrm{city}} -28.874664}
 $$\par
-这时候，根据手头上得知的信息，估算出$ t_{\mathrm{city}}$的值大致为：$270\mathrm{min}$，代入上式得到$t_0=121.177\mathrm{min}$。\par 
-利用matlab绘制出图像，蓝色部分时间为司机应当继续排队等待接客，红色部分代表司机不应该继续排队，应当直接回到郑州市中心。\par 
+这时候，根据手头上得知的信息，估算出$ t_{\mathrm{city}}$的值大致为：$270\mathrm{min}$，代入上式得到$t_0=121.177\mathrm{min}$。\par
+利用matlab绘制出图像，蓝色部分时间为司机应当继续排队等待接客，红色部分代表司机不应该继续排队，应当直接回到郑州市中心。\par
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{Figure_6.png}
 	\caption{}
 \end{figure}
-\newpage 
-毕竟关于$ t_{\mathrm{city}}$的具体值误差较大，所以把这个变量以枚举的方式展现，得到$t_0 - t_{\mathrm{city}}$的关系式：\par 
+\newpage
+毕竟关于$ t_{\mathrm{city}}$的具体值误差较大，所以把这个变量以枚举的方式展现，得到$t_0 - t_{\mathrm{city}}$的关系式：\par
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{Figure_7.png}
 	\caption{$t_0 - t_{\mathrm{city}}$关系图}
 \end{figure}
-利用具体的$t_{\mathrm{city}}$的值，司机便能够根据他所见到的情景，具体而又准确的选择出是否机场排队接客或者是直接回市区。\par 
+利用具体的$t_{\mathrm{city}}$的值，司机便能够根据他所见到的情景，具体而又准确的选择出是否机场排队接客或者是直接回市区。\par
 
 \newpage
 \subsection{问题三的建模与求解}
