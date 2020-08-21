@@ -105,19 +105,21 @@
 \begin{center}
 	\begin{tabular}{cc}
 		\hline
-		\makebox[0.3\textwidth][c]{符号} & \makebox[0.4\textwidth][c]{意义}           \\ \hline
-		$fee$                            & 出租车的计价收益                           \\
-		$t_{ \mathrm{wait}}$             & 出租车排队等待时间加服务时间               \\
-		$m_{\mathrm{start}}$             & 出租车起步价                               \\
-		$m_{\mathrm{oil}}$               & 每一公里出租车的油费价格                   \\
-		$m_{\mathrm{night}}$             & 夜价提升价格量                             \\
-		$m_{\mathrm{aver}}$              & 在市区当中的平均收入                       \\
-		$l_{\mathrm{init}}$              & 出租车计价起步距离                         \\
-		$k$                              & 每公里计费价格                             \\
-		$l_{\mathrm{urban}}$             & 机场到市区的平均距离                       \\
-		$v_{\mathrm{sub}}$               & 从机场到市区当中的郊区行车速度             \\
-		$t_{\mathrm{city}}$              & 司机在市区中平均在每隔多久能接到到机场的客 \\
-		$t_{\mathrm{wait}}$              & 出租车排队等待时间与服务时间总和           \\
+		\makebox[0.3\textwidth][c]{符号} & \makebox[0.4\textwidth][c]{意义}                     \\ \hline
+		$fee$                            & 出租车的计价收益                                     \\
+		$t_{ \mathrm{wait}}$             & 出租车排队等待时间加服务时间                         \\
+		$m_{\mathrm{start}}$             & 出租车起步价                                         \\
+		$m_{\mathrm{oil}}$               & 每一公里出租车的油费价格                             \\
+		$m_{\mathrm{night}}$             & 夜价提升价格量                                       \\
+		$m_{\mathrm{aver}}$              & 在市区当中的平均收入                                 \\
+		$l_{\mathrm{init}}$              & 出租车计价起步距离                                   \\
+		$k$                              & 每公里计费价格                                       \\
+		$l_{\mathrm{urban}}$             & 机场到高速路口的平均距离                             \\
+		$l_{\mathrm{city}}$              & 高速路口到市中心的平均距离                           \\
+		$v_{\mathrm{sub}}$               & 从机场到市区当中的郊区行车速度                       \\
+		$v_{\mathrm{city}}$              & 出租车回到市区后平均速度                             \\
+		$t_{\mathrm{city}}$              & 出租车回到市区后为完成机场订单仍需在城市中行车的时间 \\
+		$t_{\mathrm{wait}}$              & 出租车排队等待时间与服务时间总和                     \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -167,7 +169,7 @@
 
 只需要明确相同时间内排队载客后返回市区和空载返回市区这两种情况的平均收益该计算公式，司机便能够就是否排队问题做出决策。假定机场到市区的平均距离为$l_{\mathrm{urban}}$。从机场到市区行车速度为$v_{\mathrm{out}}$，市区中行车速度为$v_{\mathrm{city}}$。
 \par
-\newpage
+
 \subsubsection{模型的建立}
 
 (1)首先明确要考虑的时间段。从选择排队载客后返回市区的方向对时间段进行刻画，整个时间段划分为三部分：
@@ -223,8 +225,8 @@
 		aveincome1>aveincome2                                                                                                       \\
 		aveincome1=\frac{sumfee(l_{\mathrm{urban}}+v_{\mathrm{city}} \cdot t_{\mathrm{city}})}{t_{ \mathrm{sum}}}                   \\
 		aveincome2=\frac{m_{\mathrm{aver}}\cdot(t_{\mathrm{wait}}+t_{\mathrm{city}})-oilfee(l_{\mathrm{urban}})}{t_{ \mathrm{sum}}} \\
-		sumfee(d)=fee(d)-oilfee(d)                                                                                                  \\
-		oilfee(d)=d\cdot m_{\mathrm{oil}}
+		sumfee(l)=fee(l)-oilfee(l)                                                                                                  \\
+		oilfee(l)=l\cdot m_{\mathrm{oil}}
 	\end{array} \right.
 \end{equation}
 
@@ -246,9 +248,9 @@
 
 2.服务速度$v_{\mathrm{out}}$，表示每分钟离开蓄车池的车辆数。假设其于单队列单服务口情形下为定值。
 
-3.乘客队列增长速度$v_{\mathrm{pin}}$，表示每分钟乘客队列增长人数。假设每时刻(航班到达时刻间隔为5分钟)到达的航班数量为$n_{\mathrm{fly}}$，每辆航班上乘客为300人，乘客选择乘坐出租车的比例为$\alpha$。那么通过下式对乘客队列增长速度进行计算:
+3.乘客队列增长速度$v_{\mathrm{pin}}$，表示每分钟乘客队列增长人数。假设每时刻(航班到达时刻间隔为30分钟)到达的航班数量为$n_{\mathrm{fly}}$，每辆航班上乘客为300人，乘客选择乘坐出租车的比例为$\alpha$。那么通过下式对乘客队列增长速度进行计算:
 \begin{equation}
-	v_{\mathrm{pin}}=\frac{n_{\mathrm{fly}}\cdot 300 \cdot \alpha}{5}
+	v_{\mathrm{pin}}=\frac{n_{\mathrm{fly}}\cdot 300 \cdot \alpha}{30}
 \end{equation}
 
 对于3个速度大小，会有13种情况。下图用图示法进行划分，其中样本点到3个关键点的距离用来表示其3个速度大小。
@@ -276,7 +278,9 @@
 		$v_{\mathrm{pin}}>v_{\mathrm{out}}>v_{\mathrm{in}}$ &
 		人堆积                                                                                 \\
 		$v_{\mathrm{pin}}>v_{\mathrm{in}}=v_{\mathrm{out}}$ & 人堆积                           \\
-		$v_{\mathrm{pin}}=v_{\mathrm{in}}>v_{\mathrm{out}}$ & 人堆积，车堆积                   \\ 		$v_{\mathrm{pin}}=v_{\mathrm{out}}>v_{\mathrm{in}}$                                          &       人堆积                      \\ 	$v_{\mathrm{pin}}=v_{\mathrm{out}}=v_{\mathrm{in}}$                                          & 不堆积                       \\
+		$v_{\mathrm{pin}}=v_{\mathrm{in}}>v_{\mathrm{out}}$ & 人堆积，车堆积                   \\
+		$v_{\mathrm{pin}}=v_{\mathrm{out}}>v_{\mathrm{in}}$ & 人堆积                           \\
+		$v_{\mathrm{pin}}=v_{\mathrm{out}}=v_{\mathrm{in}}$ & 不堆积                           \\
 		$v_{\mathrm{in}}>v_{\mathrm{pin}}>v_{\mathrm{out}}$ & 人堆积，车堆积                   \\
 		$v_{\mathrm{in}}>v_{\mathrm{out}}>v_{\mathrm{pin}}$ & 车堆积                           \\
 
@@ -319,9 +323,8 @@
 
 \newpage
 \subsection{问题二的建模与求解}
-
 \subsubsection{模型的建立}
-目前再网络上能够找寻到的数据有：郑州司机的日均收入：$400$元人民币。按照每天工作$8$个小时计算，即每分钟$\frac{5}{6}$元人民币。也即$m_{\mathrm{aver} }= \frac{5}{6}$元。\par
+
 在郑州机场出租车秩序管理站上可以查询到实时的数据。\par
 每个时刻蓄车池里面均有许多车辆在里面。利用数据，可以得到如下的统计图：\par
 \begin{figure}[!h]
@@ -336,8 +339,6 @@
 	\caption{运客速度统计图（单位：辆/min）}
 \end{figure}
 
-
-\subsubsection{模型的求解}
 将场内待运车辆数写成关于时间$t$（单位：min）的表达式：$\eta(t)$。\par
 再将出站车辆数写成关于时间$t$（单位：min）的表达式：$\theta(t)$\par
 要求出$t_{\mathrm{wait}}$的大小，只需要一个积分方程。假设这个时候的时间点为$t$，则上面函数以及$t_{\mathrm{wait}}$满足约束式：\par
@@ -358,6 +359,11 @@
 	\includegraphics[width=1\textwidth]{Figure_5.png}
 	\caption{等待时间统计图（单位：min）}
 \end{figure}
+
+\subsubsection{模型的求解}
+
+目前再网络上能够找寻到的数据有：郑州司机的日均收入：$400$元人民币。按照每天工作$8$个小时计算，即每分钟$\frac{5}{6}$元人民币。也即$m_{\mathrm{aver} }= \frac{5}{6}$元。\par
+
 这时候，查询郑州的出租车价格信息网得知，价格费用与路程的关系为：\par
 \begin{equation}
 	\mathrm{fee}(l)=\left\{
@@ -370,65 +376,163 @@
 $c_0$在白天$8$元，在晚上$10$元。\par
 而这时候，查询郑州的汽油价格信息网得知，92号汽油每一升为$5.60$元，那么，每公里价格为$0.4746$元\par
 查询高速路行车速度得知:平均速度为$100\mathrm{km/h}$即$\frac{5}{3}\mathrm{km/min} $\par
-查询地图得知：平均到市中心距离为：$50.7\mathrm{km}$
+查询市区行车速度得知:平均速度为$30\mathrm{km/h}$即$0.5\mathrm{km/min} $\par
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{Map_1.png}
 	\caption{地图信息}
 \end{figure}
+根据地图查询结果得知：平均到市中心距离为：$50.7\mathrm{km}$，其中到高速路口距离为$l_{\mathrm{urban}}=35.7\mathrm{km}$，高速路口到市中心距离为$l_{\mathrm{city}}=15\mathrm{km}$\par
+其中，由于满足式子：
+\begin{equation}
+	l_{\mathrm{city}}=v_{\mathrm{city}}\cdot t_{\mathrm{city}}
+\end{equation}
+所以有$ t_{\mathrm{city}} = \frac{l_{\mathrm{city}}}{v_{\mathrm{city}}}=30\mathrm{min} $
 
 也即最终得到如下信息表格：\par
 \begin{table}[!htbp]
 	\caption[标签名]{得到的结果（部分）}
-	\begin{tabular}{c|c|c|c|c|c|c|c}
+	\begin{tabular}{c|c|c|c|c|c|c|c|c}
 		\toprule[1.5pt]
-		$m_{\mathrm{start}}$ & $m_{\mathrm{oil}}$       & $l_{\mathrm{init}}$ & $v_{\mathrm{out}}$            & $m_{\mathrm{night}}$ & $m_{\mathrm{aver}}$ & $l_{\mathrm{urban}}$ & $k$                    \\
+		$m_{\mathrm{start}}$ & $m_{\mathrm{oil}}$       & $l_{\mathrm{init}}$ & $v_{\mathrm{sub}}$            & $m_{\mathrm{night}}$ & $m_{\mathrm{aver}}$ & $l_{\mathrm{urban}}$ & $k$                    & $v_{\mathrm{city}}$  \\
 		\midrule[1pt]
-		8元                  & $0.4746$元$\mathrm{/km}$ & $2\mathrm{km}$      & $ \frac{5}{3}\mathrm{km/min}$ & $2$元                & $\frac{5}{6}$元     & $50.7\mathrm{km}$    & $ 1.5$元$\mathrm{/km}$ \\
+		8元                  & $0.4746$元$\mathrm{/km}$ & $2\mathrm{km}$      & $ \frac{5}{3}\mathrm{km/min}$ & $2$元                & $\frac{5}{6}$元     & $50.7\mathrm{km}$    & $ 1.5$元$\mathrm{/km}$ & $0.5\mathrm{km/min}$ \\
+		\bottomrule[1.5pt]
+		$t_{\mathrm{city}}$  & $v_{\mathrm{city}}$      &                     &                               &                      &                     &                      &                        &                      \\
+		\midrule[1pt]
+		$30\mathrm{min}$     & $0.5\mathrm{km/min} $    &                     &                               &                      &                     &                      &                        &                      \\
 		\bottomrule[1.5pt]
 	\end{tabular}
 \end{table}
 代入式子：
 $$
-	t_0 = \frac{\left(\frac{l_{\mathrm{urban}}}{v_{\mathrm{out}}}+t_{\mathrm{city}}\right)\cdot \left(m_{\mathrm{start}}+ l_{\mathrm{urban}}\cdot k -k\cdot l_{\mathrm{init}} \right)}{ m_{\mathrm{aver}}\cdot t_{\mathrm{city}}-l_{\mathrm{urban}}\cdot m_{\mathrm{oil}}}
+	t_0=  \frac{fee(l_{\mathrm{urban}}+v_{\mathrm{city}} \cdot t_{\mathrm{city}})-m_{\mathrm{oil}}\cdot v_{\mathrm{city}} \cdot t_{\mathrm{city}}}{m_{\mathrm{aver}}} -t_{\mathrm{city}}
 $$\par
 当中，得到
 $$
-	t_0 = \frac{\left(\frac{50.7}{\frac{5}{3}}+t_{\mathrm{city}}\right)\cdot \left(8+50.7\cdot 1.5 -1.5\cdot 2 \right)}{ \frac{5}{6}\cdot t_{\mathrm{city}}-50.7\cdot 0.4746}=\frac{97.26\cdot t_{\mathrm{city}}+2958.6492}{ t_{\mathrm{city}} -28.874664}
+	t_0=  \frac{6}{5}\cdot(fee(50.7+0.5 \cdot 30)-0.4746\cdot 0.5 \cdot 30) -30= \frac{6}{5}\cdot fee(65.7)-38.5428
 $$\par
-这时候，根据手头上得知的信息，估算出$ t_{\mathrm{city}}$的值大致为：$270\mathrm{min}$，代入上式得到$t_0=121.177\mathrm{min}$。\par
-利用matlab绘制出图像，蓝色部分时间为司机应当继续排队等待接客，红色部分代表司机不应该继续排队，应当直接回到郑州市中心。\par
+则当为白天时，$t_0$为$t_0=85.7172\mathrm{min}$，当为夜班凌晨时，$t_0$为$t_0=88.1172\mathrm{min}$\par
+由于加收夜补时间为22：00(含22：00)至次日5：00(含5：00)，于是可以利用matlab绘制出图像，蓝色部分时间为司机应当继续排队等待接客，红色部分代表司机不应该继续排队，应当直接回到郑州市中心。\par
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{Figure_6.png}
 	\caption{}
 \end{figure}
-\newpage
-毕竟关于$ t_{\mathrm{city}}$的具体值误差较大，所以把这个变量以枚举的方式展现，得到$t_0 - t_{\mathrm{city}}$的关系式：\par
+上面这幅图代表司机理应当做出的真正选择，但由于司机指能够根据他所见到的情景推算出大致的$t_{\mathrm{wait}}$，所以实际情况与应当选择的上一幅图是具有一定出入的，利用1问当中列举出的司机应当如何利用所得到的信息大致计算出还需要排多久。\par
+收集到飞机航班信息之后，能够得到下图：\par \newpage
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=1\textwidth]{Figure_7.png}
-	\caption{$t_0 - t_{\mathrm{city}}$关系图}
+	\includegraphics[width=1\textwidth]{Figure_8.png}
+	\caption{}
 \end{figure}
-利用具体的$t_{\mathrm{city}}$的值，司机便能够根据他所见到的情景，具体而又准确的选择出是否机场排队接客或者是直接回市区。\par
+利用$v_{\mathrm{pin}}=\frac{n_{\mathrm{fly}}\cdot 300 \cdot \alpha}{30}$以及当不堆积或人堆积时有$t_{\mathrm{wait}}=\frac{n}{v_{\mathrm{out}}}$亦或者是人不堆积而车堆积时有$t_{\mathrm{wait}}=\frac{n}{v_{\mathrm{pin}}}$,我们能够得到司机在那个时刻根据具体情况所判断出来的$t_{\mathrm{wait}}$的值。\par
+
+利用司机能够得知的内容与郑州市数据中心所产生的内容，也即下幅图片：\par
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{datat.png}
+	\caption{}
+\end{figure}
+
+结合matlab程序，得到司机所观测到的等待时间$t_{\mathrm{wait}}$，
+其中，令$\alpha\sim\frac{1}{10}$，得出\par
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Figure_9.png}
+	\caption{}
+\end{figure}
+\newpage
+依旧按照上图蓝色部分时间为司机应当继续排队等待接客，红色部分代表司机不应该继
+续排队，应当直接回到郑州市中心的表示方法，利用 matlab绘制出图像。\par
+则司机自身的选择会变成：\par
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{Figure_10.png}
+	\caption{}
+\end{figure}
+
 
 \newpage
 \subsection{问题三的建模与求解}
 
 \subsubsection{模型的建立}
-依据接待方式的不同，能最终划归成两种情况：
+第三问从机场管理部门角度出发，希望在有两条车道的前提下合理设置“上车点”，使得在保证车辆和乘客安全的条件下，使得总的乘车效率最高。\par
+本文设置“上车点”的主要方案有以下几种:\par
+1.控制“上车点”的数量，从而控制服务速度$v_{\mathrm{out}}$。\par
+2.控制“上车点”的位置，从而控制蓄车池内出租车上限$N$。\par
+
+
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=1\textwidth]{case1.png}
-	\caption{情况一}
+	\caption{模拟送客示意图}
 \end{figure}
 
+\subsubsection{元胞自动机仿真模型}
+
+为使得模型简单化，现只考虑蓄车池状态，并将蓄车池看成一个元胞。该元胞的主要参数为出租车数量$taxinum$。其转移过程如下图所示：
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=1\textwidth]{case2.png}
-	\caption{情况二}
+	\includegraphics[width=1\textwidth]{元胞自动机模型.png}
+	\caption{元胞转移过程}
 \end{figure}
 
+上图中$\lambda$为蓄车池增长概率，即单位时间元胞有$\lambda$概率增长1；图中$\mu$为服务概率，即单位时间元胞有$\mu$概率减小1。
+
+如此，当“上车点”的数量增加，$\mu$值等比例增加。
+
+为考察乘车效率，在此处定义流通系数：
+\begin{equation}
+	flu=\frac{servenum}{taxinum}
+\end{equation}
+
+上式中$servenum$为服务状态出租车数量。当总出租车数量增大时，流通系数减小；当服务数量增大时，在总出租车数量保持不变的情形下，流通系数增大。
+
+假定初始态$\lambda=0.1$，$\mu=0.1$，$N=20$,用$python$程序模拟元胞变化过程，结果如下图所示：
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=1\textwidth]{YBresult1.png}
+	\caption{元胞仿真结果1}
+\end{figure}
+\newpage
+
+现考察改变“上车点”数量时，流通系数的变化如下表所示：
+\begin{center}
+	\begin{tabular}{cccc}
+		\hline
+		上车点数量 & 蓄车池上限 & $\mu$ & 平均流通系数 \\
+		\hline
+		1          & 20         & 0.1   & 0.0108       \\
+		2          & 20         & 0.2   & 0.0724       \\
+		3          & 20         & 0.3   & 0.0780       \\
+		4          & 20         & 0.4   & 0.0856       \\
+		5          & 20         & 0.5   & 0.0882       \\
+		6          & 20         & 0.6   & 0.0926       \\
+		\hline
+	\end{tabular}
+\end{center}
+
+可发现，当固定蓄车池上限时，流通系数随上车点数量增加而增加，因而应在保证安全的情形下尽可能多安排上车点。
+
+下面分析“上车点”位置即蓄车池上限对平均流通系数的影响，默认$\lambda=0.3$，$\mu=0.3$。
+\begin{center}
+	\begin{tabular}{cccc}
+		\hline
+		上车点数量 & 蓄车池上限 & $\mu$ & 平均流通系数 \\
+		\hline
+		3          & 20         & 0.3   & 0.0638       \\
+		3          & 30         & 0.3   & 0.0652       \\
+		3          & 40         & 0.3   & 0.0509       \\
+		3          & 50         & 0.3   & 0.0318       \\
+		3          & 60         & 0.3   & 0.0176       \\
+		\hline
+	\end{tabular}
+\end{center}
+
+会发现，确定上车点数量，当蓄车池上限增加时，总出租车数量可能性均值随之增加，因而流通系数下降。与实际情况相符。
+
+根据以上分析，可以得到结论：应在保证安全的情形下提高上车点位置；降低蓄车池上限。
 
 \subsubsection{模型的求解}
 
@@ -652,6 +756,59 @@ xlim([time_temp(1,1)  time(20282)])
 area(time,numbers,'DisplayName','numbers')
 xlim([time_temp(1,1)  time(20282)])
 
+
+time_arr =  arrival.time;
+status = arrival.status;
+
+t = 1/48
+
+data = 1:48;
+
+for i=1:48
+    data(1,i) = 0;
+end
+
+for i=1:48
+    temp = 0;
+    for j=1:368
+        if time_arr(j) > (t*(i-1))
+            if time_arr(j) < (t*i)
+                temp = temp + 1;               
+            end
+        end
+    end
+    data(1,i) = temp
+end
+
+plot(xx,data)
+bar(xx,data,'DisplayName','data')
+
+
+START = 8531
+
+GAP = 360
+
+t_wait_t = 1:48;
+
+for i=1:48
+    t_wait_t(i) = 0; 
+end
+
+for i=1:48
+    num = data(1,i);
+    if num == 0
+        num = 0.5;
+    end
+    t_wait_t(i) = numbers(START+(i-1)*GAP) / num
+end
+
+
+>> xx = 1:48;
+>> histogram(t_wait_t,xx)
+>> area(xx,t_wait_t,'DisplayName','t_wait_t')
+>> area(xx,t_wait_t,'DisplayName','t_wait_t')
+>> xlim([0.5 48])
+>> xlim([1 48])
 \end{lstlisting}
 
 
